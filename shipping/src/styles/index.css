@@ -42,3 +42,8 @@ nav{
 .nav-button{
     color: black;
 }
+
+.card-user{
+    padding: 16px;
+    min-width: 375px;
+}

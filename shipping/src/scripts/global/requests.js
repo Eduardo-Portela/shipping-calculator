@@ -1,32 +1,32 @@
-import { createModal } from "./modal"
+import { createModal } from "../global/modal.js"
 
-const baseUrl: string = "https://frontend-test.frenet.dev/v1"
+const baseUrl = "https://frontend-test.frenet.dev/v1"
 
-export interface IcreateUser {
-    username: string,
-    firstName: string,
-    lastName: string,
-    email: string,
-    password: string,
-    phone: string,
-    userStatus: number
-}
-export interface IcreateUserResponse extends IcreateUser{
-    id: number
-}
+// export interface IcreateUser {
+//     username: string,
+//     firstName: string,
+//     lastName: string,
+//     email: string,
+//     password: string,
+//     phone: string,
+//     userStatus: number
+// }
+// export interface IcreateUserResponse extends IcreateUser{
+//     id: number
+// }
 
-export interface IShippingRequest {
-        zipCodeSource: string,
-        zipCodeDestination: string,
-        weight: number,
-        dimension: {
-          width: number,
-          heigth: number,
-          length: number
-        }
-}
+// export interface IShippingRequest {
+//         zipCodeSource: string,
+//         zipCodeDestination: string,
+//         weight: number,
+//         dimension: {
+//           width: number,
+//           heigth: number,
+//           length: number
+//         }
+// }
 
-export const createUserRequest = async(body: IcreateUser)=> {
+export const createUserRequest = async(body)=> {
     try {
         const request = await fetch(`${baseUrl}/user`, {
             method: "POST",
@@ -36,7 +36,7 @@ export const createUserRequest = async(body: IcreateUser)=> {
             body: JSON.stringify(body)
         })
         if(request.ok){
-            const response: IcreateUserResponse = await request.json()
+            const response = await request.json()
             createModal("Usuário criado com sucesso!")
             setTimeout(()=> {
                 window.location.assign("../../index.html")
@@ -52,11 +52,11 @@ export const createUserRequest = async(body: IcreateUser)=> {
     }
 }
 
-export const getUserRequest = async(userName: string)=> {
+export const getUserRequest = async(userName)=> {
     try {
         const request = await fetch(`${baseUrl}/user/${userName}`, {})
         if(request.ok){
-            const response: IcreateUserResponse = await request.json()
+            const response = await request.json()
             return response
         }
 
@@ -66,7 +66,7 @@ export const getUserRequest = async(userName: string)=> {
     }
 }
 
-export const updateUserRequest = async(body: IcreateUser, userName: string)=> {
+export const updateUserRequest = async(body, userName)=> {
     try {
         const request = await fetch(`${baseUrl}/user/${userName}`, {
             method: "PUT",
@@ -76,7 +76,7 @@ export const updateUserRequest = async(body: IcreateUser, userName: string)=> {
             body: JSON.stringify(body)
         })
         if(request.ok){
-            const response: IcreateUserResponse = await request.json()
+            const response = await request.json()
                 createModal("Usuario editado com sucesso!")
                 return response
             }else{
@@ -87,7 +87,7 @@ export const updateUserRequest = async(body: IcreateUser, userName: string)=> {
     }
 }
 
-export const deleteUserRequest = async (userName: string) => {
+export const deleteUserRequest = async (userName) => {
     try {
         const request = await fetch(`${baseUrl}/user/${userName}`, {
             method: "DELETE",
@@ -106,7 +106,7 @@ export const deleteUserRequest = async (userName: string) => {
     }
 }
 
-export const shippingCalculatorRequest = async(body: IShippingRequest) => {
+export const shippingCalculatorRequest = async(body) => {
     try {
         const request = await fetch(`${baseUrl}/quote`, {
             method: "POST",

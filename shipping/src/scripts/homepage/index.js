@@ -1,36 +1,36 @@
-import { createModal } from "../global/modal"
-import {  IcreateUserResponse, deleteUserRequest, getUserRequest, shippingCalculatorRequest } from "../global/requests"
+import { createModal } from "../global/modal.js"
+import { deleteUserRequest, getUserRequest, shippingCalculatorRequest } from "../global/requests.js"
 
 const getUserByUserName = async () => {
-    const renderUserDiv: HTMLElement | null = document.querySelector(".render-user")
-    const form: HTMLFormElement | null = document.querySelector(".form-search")
+    const renderUserDiv = document.querySelector(".render-user")
+    const form = document.querySelector(".form-search")
 
-    form!.addEventListener("submit", async (e)=> {
+    form.addEventListener("submit", async (e)=> {
         renderUserDiv?.classList.add("card")
-        renderUserDiv!.innerHTML = ""
+        renderUserDiv.innerHTML = ""
         e.preventDefault()
-        const inputUser: HTMLInputElement = document.querySelector(".inputSearch")!
+        const inputUser = document.querySelector(".inputSearch") //Terminou aqui
         await getUserRequest(inputUser.value)
-        renderUser(inputUser.value, renderUserDiv!)
+        renderUser(inputUser.value, renderUserDiv)
     })
 }
 
 getUserByUserName()
 
 const deleteUser = async () => {
-    const form: HTMLFormElement | null = document.querySelector(".form-delete")
+    const form = document.querySelector(".form-delete")
 
-    form!.addEventListener("submit", async (e)=> {
+    form.addEventListener("submit", async (e)=> {
         e.preventDefault()
-        const inputUser: HTMLInputElement = document.querySelector(".input-delete")!
+        const inputUser = document.querySelector(".input-delete")
         await deleteUserRequest(inputUser.value)
     })
 }
 
 deleteUser()
 
-const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
-    const userInfos: IcreateUserResponse| undefined = await getUserRequest(inputUser)
+const renderUser = async (inputUser, renderUserDiv) => {
+    const userInfos = await getUserRequest(inputUser)
 
     const notFound = document.createElement("h4")
     notFound.classList.add("mt-3", "text-center") 
@@ -41,19 +41,19 @@ const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
     }
 
     const id = document.createElement("h5")
-    id.innerText = `Id => ${userInfos!.id}`
+    id.innerText = `Id => ${userInfos.id}`
     const userName = document.createElement("h5")
-    userName.innerText = `Username => ${userInfos!.username}`
+    userName.innerText = `Username => ${userInfos.username}`
     const firstName = document.createElement("h5")
-    firstName.innerText = `First name => ${userInfos!.firstName}`
+    firstName.innerText = `First name => ${userInfos.firstName}`
     const lastName = document.createElement("h5")
-    lastName.innerText = `Last name => ${userInfos!.lastName}`
+    lastName.innerText = `Last name => ${userInfos.lastName}`
     const email = document.createElement("h5")
-    email.innerText = `Email => ${userInfos!.email}`
+    email.innerText = `Email => ${userInfos.email}`
     const phone = document.createElement("h5")
-    phone.innerText = `Telefone => ${userInfos!.phone}`
+    phone.innerText = `Telefone => ${userInfos.phone}`
     const userStatus = document.createElement("h5")
-    userStatus.innerText = `User status => ${userInfos!.userStatus}`
+    userStatus.innerText = `User status => ${userInfos.userStatus}`
 
 
 
@@ -61,16 +61,16 @@ const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
 }
 
 const getShippings = async () => {
-    const form: HTMLFormElement | null = document.querySelector(".form-shipping")
-    const elements: any = [...form!.elements]
+    const form= document.querySelector(".form-shipping")
+    const elements = [...form.elements]
 
-    const body: any = {}
-    const dimensions: any = {}
+    const body = {}
+    const dimensions = {}
 
-    form!.addEventListener("submit", async(e)=> {
+    form.addEventListener("submit", async(e)=> {
         e.preventDefault()
 
-        elements.forEach((element: HTMLInputElement) => {
+        elements.forEach((element) => {
             if(element.tagName == "INPUT" && element.name){
                 if(element.name === "width" || element.name === "heigth" || element.name === "length"){
                     dimensions[element.name] = element.value
@@ -90,10 +90,10 @@ const getShippings = async () => {
 
 getShippings()
 
-const renderShippings = async (quotations: any) => {
-    const renderShippingDiv: HTMLElement | null = document.querySelector(".render-shippings")
+const renderShippings = async (quotations) => {
+    const renderShippingDiv = document.querySelector(".render-shippings")
 
-    quotations.sort(function(a:any,b:any) {
+    quotations.sort(function(a,b) {
         if(a.platformShippingPrice < b.platformShippingPrice){
             return -1
         }else{
@@ -101,15 +101,15 @@ const renderShippings = async (quotations: any) => {
         }
     })
 
-    quotations.forEach((ele: any)=> {
+    quotations.forEach((ele)=> {
         const divShippingsInfos = document.createElement("div")
         divShippingsInfos.classList.add("card", "card-ship")
         const carrier = document.createElement("h5")
-        carrier.innerText = `${ele!.carrier}`
+        carrier.innerText = `${ele.carrier}`
         const deliveryTime = document.createElement("h5")
-        deliveryTime.innerText = `Prazo => ${ele!.deliveryTime} dias`
+        deliveryTime.innerText = `Prazo => ${ele.deliveryTime} dias`
         const platShipPrice = document.createElement("h5")
-        platShipPrice.innerText = `Preço => R$ ${ele!.platformShippingPrice}`
+        platShipPrice.innerText = `Preço => R$ ${ele.platformShippingPrice}`
 
         divShippingsInfos.append(carrier,deliveryTime, platShipPrice)
         renderShippingDiv?.appendChild(divShippingsInfos)

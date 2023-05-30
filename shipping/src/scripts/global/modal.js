@@ -1,4 +1,4 @@
-export const createModal = (message: string) => {
+export const createModal = (message) => {
     const body = document.querySelector("body")
     const modal = document.createElement("dialog")
     const buttonClose = document.createElement("button")
