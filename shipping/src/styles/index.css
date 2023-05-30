@@ -28,3 +28,17 @@ dialog button {
     text-align: center;
     margin: 16px 0 16px 0;
 }
+
+nav{
+    background-color: #fff;
+}
+
+.card-ship{
+    width: 350px;
+    margin-right: 16px;
+    margin-bottom: 16px;
+}
+
+.nav-button{
+    color: black;
+}

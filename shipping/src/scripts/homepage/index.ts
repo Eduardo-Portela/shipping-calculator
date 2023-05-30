@@ -60,10 +60,9 @@ const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
     renderUserDiv?.append(id, userName, firstName, lastName, email, phone, userStatus)
 }
 
-const renderShippings = async () => {
+const getShippings = async () => {
     const form: HTMLFormElement | null = document.querySelector(".form-shipping")
     const elements: any = [...form!.elements]
-    console.log(elements)
 
     const body: any = {}
     const dimensions: any = {}
@@ -84,9 +83,35 @@ const renderShippings = async () => {
             ...body,
             dimension: dimensions
         }
-        console.log(newBody)
-        await shippingCalculatorRequest(newBody)
+        const response = await shippingCalculatorRequest(newBody)
+        renderShippings(response.quotations)
     })
 }
 
-renderShippings()
+getShippings()
+
+const renderShippings = async (quotations: any) => {
+    const renderShippingDiv: HTMLElement | null = document.querySelector(".render-shippings")
+
+    quotations.sort(function(a:any,b:any) {
+        if(a.platformShippingPrice < b.platformShippingPrice){
+            return -1
+        }else{
+            return true
+        }
+    })
+
+    quotations.forEach((ele: any)=> {
+        const divShippingsInfos = document.createElement("div")
+        divShippingsInfos.classList.add("card", "card-ship")
+        const carrier = document.createElement("h5")
+        carrier.innerText = `${ele!.carrier}`
+        const deliveryTime = document.createElement("h5")
+        deliveryTime.innerText = `Prazo => ${ele!.deliveryTime} dias`
+        const platShipPrice = document.createElement("h5")
+        platShipPrice.innerText = `Preço => R$ ${ele!.platformShippingPrice}`
+
+        divShippingsInfos.append(carrier,deliveryTime, platShipPrice)
+        renderShippingDiv?.appendChild(divShippingsInfos)
+    })
+}

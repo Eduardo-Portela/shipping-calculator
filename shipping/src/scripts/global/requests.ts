@@ -116,7 +116,7 @@ export const shippingCalculatorRequest = async(body: IShippingRequest) => {
             body: JSON.stringify(body)
         })
         if(request.ok){
-            const response: IcreateUserResponse = await request.json()
+            const response = await request.json()
             console.log(response)
             return response
         }
