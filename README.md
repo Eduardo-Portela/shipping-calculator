@@ -1,4 +1,4 @@
-## shipping-calculator
+## Shipping-calculator
 
 and
 
