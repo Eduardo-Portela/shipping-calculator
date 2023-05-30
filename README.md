@@ -7,6 +7,7 @@ and
 ## Installation
 
 ```bash
+$ cd shipping
 $ npm install
 ```
 
