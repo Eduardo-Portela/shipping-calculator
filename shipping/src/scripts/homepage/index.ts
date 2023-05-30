@@ -1,5 +1,5 @@
 import { createModal } from "../global/modal"
-import {  IcreateUserResponse, deleteUserRequest, getUserRequest } from "../global/requests"
+import {  IcreateUserResponse, deleteUserRequest, getUserRequest, shippingCalculatorRequest } from "../global/requests"
 
 const getUserByUserName = async () => {
     const renderUserDiv: HTMLElement | null = document.querySelector(".render-user")
@@ -59,3 +59,34 @@ const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
 
     renderUserDiv?.append(id, userName, firstName, lastName, email, phone, userStatus)
 }
+
+const renderShippings = async () => {
+    const form: HTMLFormElement | null = document.querySelector(".form-shipping")
+    const elements: any = [...form!.elements]
+    console.log(elements)
+
+    const body: any = {}
+    const dimensions: any = {}
+
+    form!.addEventListener("submit", async(e)=> {
+        e.preventDefault()
+
+        elements.forEach((element: HTMLInputElement) => {
+            if(element.tagName == "INPUT" && element.name){
+                if(element.name === "width" || element.name === "heigth" || element.name === "length"){
+                    dimensions[element.name] = element.value
+                }else{
+                    body[element.name] = element.value
+                }
+            }
+        })
+        const newBody = {
+            ...body,
+            dimension: dimensions
+        }
+        console.log(newBody)
+        await shippingCalculatorRequest(newBody)
+    })
+}
+
+renderShippings()

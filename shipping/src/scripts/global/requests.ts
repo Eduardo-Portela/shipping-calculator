@@ -15,6 +15,17 @@ export interface IcreateUserResponse extends IcreateUser{
     id: number
 }
 
+export interface IShippingRequest {
+        zipCodeSource: string,
+        zipCodeDestination: string,
+        weight: number,
+        dimension: {
+          width: number,
+          heigth: number,
+          length: number
+        }
+}
+
 export const createUserRequest = async(body: IcreateUser)=> {
     try {
         const request = await fetch(`${baseUrl}/user`, {
@@ -89,6 +100,27 @@ export const deleteUserRequest = async (userName: string) => {
         }else{
                 createModal("Opss!!! Algo deu errado!")
             }
+
+    } catch(error) {
+        console.log(error)
+    }
+}
+
+export const shippingCalculatorRequest = async(body: IShippingRequest) => {
+    try {
+        const request = await fetch(`${baseUrl}/quote`, {
+            method: "POST",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(body)
+        })
+        if(request.ok){
+            const response: IcreateUserResponse = await request.json()
+            console.log(response)
+            return response
+        }
+
 
     } catch(error) {
         console.log(error)

@@ -54,20 +54,49 @@
 
       <div class="container py-3">
         <form class="form-shipping">
-          <div class="w-100 border border-primary p-3 mh-100 d-flex justify-content-between flex-wrap">
+          <div class="w-100 border border-info p-3 mh-100 d-flex justify-content-between flex-wrap">
              <div class="col-6 mb-2">
-                 <label for="userName" class="form-label">Cep de origem</label>
-                 <input type="text" class="form-control input-delete" id="userNameInput" name="userName">
+                 <label for="zipCodeSource" class="form-label">Cep de origem</label>
+                 <input type="text" class="form-control input-delete" id="zipCodeSource" name="zipCodeSource" value="01310-200">
              </div>
+
              <div class="col-6 mb-2">
-                 <label for="userName" class="form-label">Cep de origem</label>
-                 <input type="text" class="form-control input-delete" id="userNameInput" name="userName">
+                 <label for="zipCodeDestination" class="form-label">Cep de destino</label>
+                 <input type="text" class="form-control input-delete" id="zipCodeDestination" name="zipCodeDestination" value="22220-000">
              </div>
+
              <div class="col-2 mb-2">
-              <label for="userName" class="form-label">Cep de origem</label>
-              <input type="text" class="form-control input-delete" id="userNameInput" name="userName">
+              <label for="width" class="form-label">largura</label>
+              <input type="text" class="form-control input-delete" id="width" name="width" value="5">
              </div>
-         
+
+             <div class="col-2 mb-2">
+              <label for="heigth" class="form-label">altura</label>
+              <input type="text" class="form-control input-delete" id="heigth" name="heigth" value="5">
+             </div>
+
+             <div class="col-2 mb-2">
+              <label for="length" class="form-label">Comprimento</label>
+              <input type="text" class="form-control input-delete" id="length" name="length" value="1">
+             </div>
+
+             <div class="col-2 mb-2">
+              <label for="weight" class="form-label">Peso</label>
+              <input type="text" class="form-control input-delete" id="weight" name="weight" value="0.300">
+             </div>
+
+             <div class="col-2 mb-2">
+              <label for="quantity" class="form-label">quantidade</label>
+              <input type="number" class="form-control input-delete" id="quantity"  value="1">
+             </div>
+
+             <div class="col-2 mb-2">
+              <label for="value" class="form-label">valor</label>
+              <input type="text" class="form-control input-delete" id="value"  value="15,00">
+             </div>
+             <div class="d-flex justify-content-center w-100">
+               <button type="submit" class="btn btn-info w-50 mb-3 mt-3">Calcular Frete</button>
+             </div>
         </form>
       </div>
 
@@ -94,7 +123,7 @@
 
       <div class="container py-3">
         <form class="form-delete">
-          <div class="div-form w-100 border border-primary p-3 mh-100">
+          <div class="div-form w-100 border border-danger p-3 mh-100">
             <h2 class="text-center">Deletar Usuário</h2>
             <div class="col-12 mb-2">
                 <label for="userName" class="form-label">Digite o username do Usuário a ser deletado</label>
