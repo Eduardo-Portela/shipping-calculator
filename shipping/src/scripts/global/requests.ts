@@ -1,3 +1,4 @@
+import { IShippingResponse } from "../homepage"
 import { createModal } from "./modal"
 
 const baseUrl: string = "https://frontend-test.frenet.dev/v1"
@@ -28,7 +29,7 @@ export interface IShippingRequest {
 
 export const createUserRequest = async(body: IcreateUser)=> {
     try {
-        const request = await fetch(`${baseUrl}/user`, {
+        const request: Response = await fetch(`${baseUrl}/user`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -54,7 +55,7 @@ export const createUserRequest = async(body: IcreateUser)=> {
 
 export const getUserRequest = async(userName: string)=> {
     try {
-        const request = await fetch(`${baseUrl}/user/${userName}`, {})
+        const request: Response = await fetch(`${baseUrl}/user/${userName}`, {})
         if(request.ok){
             const response: IcreateUserResponse = await request.json()
             return response
@@ -68,7 +69,7 @@ export const getUserRequest = async(userName: string)=> {
 
 export const updateUserRequest = async(body: IcreateUser, userName: string)=> {
     try {
-        const request = await fetch(`${baseUrl}/user/${userName}`, {
+        const request: Response = await fetch(`${baseUrl}/user/${userName}`, {
             method: "PUT",
             headers: {
                 "Content-type": "application/json"
@@ -89,7 +90,7 @@ export const updateUserRequest = async(body: IcreateUser, userName: string)=> {
 
 export const deleteUserRequest = async (userName: string) => {
     try {
-        const request = await fetch(`${baseUrl}/user/${userName}`, {
+        const request: Response = await fetch(`${baseUrl}/user/${userName}`, {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
@@ -108,7 +109,7 @@ export const deleteUserRequest = async (userName: string) => {
 
 export const shippingCalculatorRequest = async(body: IShippingRequest) => {
     try {
-        const request = await fetch(`${baseUrl}/quote`, {
+        const request: Response = await fetch(`${baseUrl}/quote`, {
             method: "POST",
             headers: {
                 "Content-type": "application/json"
@@ -116,7 +117,7 @@ export const shippingCalculatorRequest = async(body: IShippingRequest) => {
             body: JSON.stringify(body)
         })
         if(request.ok){
-            const response = await request.json()
+            const response: IShippingResponse = await request.json()
             return response
         }
 

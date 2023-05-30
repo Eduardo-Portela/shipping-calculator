@@ -1,6 +1,39 @@
 import { createModal } from "../global/modal"
 import {  IcreateUserResponse, deleteUserRequest, getUserRequest, shippingCalculatorRequest } from "../global/requests"
 
+export interface IShippingRequest  {
+        zipCodeSource: string,
+        zipCodeDestination: string,
+        weight: number,
+        dimension: {
+          width: number,
+          heigth: number,
+          length: number
+      }
+}
+export interface IShippingResponse {
+        sessionId: string,
+        quotations: [
+          {
+            shippingServiceCode: string,
+            shippingServiceName: string,
+            platformShippingPrice: number,
+            deliveryTime: number,
+            carrier: string,
+            carrierCode: string,
+            shippingPrice: number,
+            shippingCompetitorPrice: number,
+            services: {
+              declaredValue: boolean,
+              receiptNotification: boolean,
+              ownHand: boolean
+            },
+            error: boolean,
+            msg: string
+          }
+        ]
+      }
+
 const getUserByUserName = async () => {
     const renderUserDiv: HTMLElement | null = document.querySelector(".render-user")
     const form: HTMLFormElement | null = document.querySelector(".form-search")
@@ -32,7 +65,7 @@ deleteUser()
 const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
     const userInfos: IcreateUserResponse| undefined = await getUserRequest(inputUser)
 
-    const notFound = document.createElement("h4")
+    const notFound: HTMLElement = document.createElement("h4")
     notFound.classList.add("mt-3", "text-center") 
     notFound.innerText = "Usuário não encontrado! Verifique se o username está escrito corretamente."
     if(!userInfos){
@@ -40,19 +73,19 @@ const renderUser = async (inputUser: string, renderUserDiv: HTMLElement) => {
         return createModal("Usuário não encontrado! Verifique se o username está escrito corretamente.")
     }
 
-    const id = document.createElement("h5")
+    const id: HTMLElement = document.createElement("h5")
     id.innerText = `Id => ${userInfos!.id}`
-    const userName = document.createElement("h5")
+    const userName: HTMLElement = document.createElement("h5")
     userName.innerText = `Username => ${userInfos!.username}`
-    const firstName = document.createElement("h5")
+    const firstName: HTMLElement = document.createElement("h5")
     firstName.innerText = `First name => ${userInfos!.firstName}`
-    const lastName = document.createElement("h5")
+    const lastName: HTMLElement = document.createElement("h5")
     lastName.innerText = `Last name => ${userInfos!.lastName}`
-    const email = document.createElement("h5")
+    const email: HTMLElement = document.createElement("h5")
     email.innerText = `Email => ${userInfos!.email}`
-    const phone = document.createElement("h5")
+    const phone: HTMLElement = document.createElement("h5")
     phone.innerText = `Telefone => ${userInfos!.phone}`
-    const userStatus = document.createElement("h5")
+    const userStatus: HTMLElement = document.createElement("h5")
     userStatus.innerText = `User status => ${userInfos!.userStatus}`
 
 
@@ -70,7 +103,7 @@ const getShippings = async () => {
     form!.addEventListener("submit", async(e)=> {
         e.preventDefault()
 
-        elements.forEach((element: HTMLInputElement) => {
+        elements.forEach((element:HTMLInputElement) => {
             if(element.tagName == "INPUT" && element.name){
                 if(element.name === "width" || element.name === "heigth" || element.name === "length"){
                     dimensions[element.name] = element.value
@@ -79,12 +112,12 @@ const getShippings = async () => {
                 }
             }
         })
-        const newBody = {
+        const newBody: any = {
             ...body,
             dimension: dimensions
         }
-        const response = await shippingCalculatorRequest(newBody)
-        renderShippings(response.quotations)
+        const response: IShippingResponse | undefined = await shippingCalculatorRequest(newBody)
+        renderShippings(response!.quotations)
     })
 }
 
@@ -102,13 +135,13 @@ const renderShippings = async (quotations: any) => {
     })
 
     quotations.forEach((ele: any)=> {
-        const divShippingsInfos = document.createElement("div")
+        const divShippingsInfos: HTMLElement = document.createElement("div")
         divShippingsInfos.classList.add("card", "card-ship")
-        const carrier = document.createElement("h5")
+        const carrier: HTMLElement = document.createElement("h5")
         carrier.innerText = `${ele!.carrier}`
-        const deliveryTime = document.createElement("h5")
+        const deliveryTime: HTMLElement = document.createElement("h5")
         deliveryTime.innerText = `Prazo => ${ele!.deliveryTime} dias`
-        const platShipPrice = document.createElement("h5")
+        const platShipPrice: HTMLElement = document.createElement("h5")
         platShipPrice.innerText = `Preço => R$ ${ele!.platformShippingPrice}`
 
         divShippingsInfos.append(carrier,deliveryTime, platShipPrice)
