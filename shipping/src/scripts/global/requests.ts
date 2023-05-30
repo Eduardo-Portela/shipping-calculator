@@ -117,7 +117,6 @@ export const shippingCalculatorRequest = async(body: IShippingRequest) => {
         })
         if(request.ok){
             const response = await request.json()
-            console.log(response)
             return response
         }
 
