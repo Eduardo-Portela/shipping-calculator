@@ -1,4 +1,3 @@
-import { createModal } from "../global/modal"
 import { createUserRequest } from "../global/requests"
 
 const createUser = () => {

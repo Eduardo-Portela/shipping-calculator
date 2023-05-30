@@ -1,4 +1,3 @@
-import { createModal } from "../global/modal"
 import { updateUserRequest } from "../global/requests"
 
 const updateUser = () => {
