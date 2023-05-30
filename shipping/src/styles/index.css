@@ -1,0 +1,30 @@
+body dialog{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+
+dialog p{
+    font-weight: 700;
+    margin-top: 1em;
+}
+
+dialog button {
+    border:  none;
+    background-color: transparent;
+    font-size: 1.5em;
+}
+
+.form-shipping{
+    display: flex;
+}
+
+.intro {
+    margin-top: 100px;
+}
+
+.intro p,h2{
+    text-align: center;
+    margin: 16px 0 16px 0;
+}
