@@ -1,0 +1,39 @@
+body{
+    height: 100vh;
+}
+
+form{
+    height: 100vh;
+}
+
+form .div-form{
+    min-width: 350px;
+}
+
+.btn-register{
+    height: 50px;
+}
+
+dialog{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+
+dialog p{
+    font-weight: 700;
+    margin-top: 1em;
+}
+
+dialog button {
+    border:  none;
+    background-color: transparent;
+    font-size: 1.5em;
+}
+
+@media (min-width: 768px) {
+    form .div-form{
+        max-width: 500px;
+    }
+}

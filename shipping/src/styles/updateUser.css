@@ -1,0 +1,21 @@
+body dialog{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 500px;
+}
+
+dialog p{
+    font-weight: 700;
+    margin-top: 1em;
+}
+
+dialog button {
+    border:  none;
+    background-color: transparent;
+    font-size: 1.5em;
+}
+
+.btn-confirm{
+    height: 50px;
+}
